@@ -1,0 +1,1262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Switzerland & Italy Family Trip · 13 Days</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blue: #2563EB; --blue-light: #EFF6FF; --blue-mid: #BFDBFE;
+    --orange: #EA580C; --orange-light: #FFF7ED; --orange-mid: #FED7AA;
+    --green: #16A34A; --green-light: #F0FDF4; --green-mid: #BBF7D0;
+    --purple: #7C3AED; --purple-light: #F5F3FF; --purple-mid: #DDD6FE;
+    --gray: #6B7280; --gray-light: #F9FAFB; --gray-mid: #E5E7EB;
+    --shadow: 0 2px 12px rgba(0,0,0,0.07);
+    --shadow-md: 0 4px 20px rgba(0,0,0,0.10);
+    --radius: 14px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Inter', sans-serif; background: #F8F9FA; color: #1a1a2e; font-size: 15px; line-height: 1.6; }
+  h1,h2,h3,h4 { font-family: 'Playfair Display', serif; }
+
+  /* HEADER */
+  .site-header { background: linear-gradient(135deg, #1E3A5F 0%, #2D6A4F 100%); color: white; padding: 32px 24px 24px; text-align: center; }
+  .site-header h1 { font-size: clamp(1.6rem, 4vw, 2.6rem); font-weight: 700; letter-spacing: -0.5px; }
+  .site-header .subtitle { opacity: 0.85; margin-top: 6px; font-size: 1rem; font-weight: 300; }
+
+  /* VERSION TOGGLE */
+  .version-bar { background: white; border-bottom: 1px solid #E5E7EB; padding: 12px 20px; display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap; }
+  .version-label { font-size: 0.85rem; font-weight: 500; color: #6B7280; }
+  .toggle-group { display: flex; background: #F3F4F6; border-radius: 8px; overflow: hidden; border: 1px solid #E5E7EB; }
+  .toggle-btn { padding: 7px 20px; font-size: 0.875rem; font-weight: 500; border: none; background: transparent; cursor: pointer; transition: all 0.2s; color: #6B7280; font-family: 'Inter', sans-serif; }
+  .toggle-btn.active { background: #1E3A5F; color: white; }
+  .version-banner { display: none; width: 100%; text-align: center; padding: 8px 16px; border-radius: 8px; font-size: 0.85rem; font-weight: 500; }
+  .version-banner.july { background: #FEF3C7; color: #92400E; display: block; }
+  .version-banner.august { background: #E0F2FE; color: #075985; display: block; }
+
+  /* REMINDERS */
+  .reminders-bar { background: #1E3A5F; color: white; padding: 10px 20px; font-size: 0.8rem; overflow: hidden; white-space: nowrap; }
+  .reminders-inner { display: flex; gap: 32px; animation: marquee 30s linear infinite; }
+  .reminder-item { display: flex; align-items: center; gap: 6px; white-space: nowrap; }
+  .reminder-item::before { content: '⚑'; font-size: 0.75rem; opacity: 0.8; }
+  @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+  .reminders-bar:hover .reminders-inner { animation-play-state: paused; }
+
+  /* NAV TABS */
+  .nav-tabs { background: white; border-bottom: 2px solid #E5E7EB; padding: 0 20px; display: flex; gap: 0; position: sticky; top: 0; z-index: 100; }
+  .nav-tab { padding: 14px 22px; font-size: 0.9rem; font-weight: 500; border: none; background: transparent; cursor: pointer; border-bottom: 3px solid transparent; margin-bottom: -2px; color: #6B7280; font-family: 'Inter', sans-serif; transition: all 0.2s; }
+  .nav-tab.active { color: #1E3A5F; border-bottom-color: #1E3A5F; }
+  .nav-tab:hover { color: #1E3A5F; }
+
+  /* CONTENT AREA */
+  .tab-content { display: none; padding: 24px 20px; max-width: 900px; margin: 0 auto; }
+  .tab-content.active { display: block; }
+
+  /* DAY CARDS */
+  .day-card { background: white; border-radius: var(--radius); box-shadow: var(--shadow); margin-bottom: 20px; overflow: hidden; border: 1px solid #F0F0F0; }
+  .day-header { padding: 18px 20px; display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; cursor: pointer; }
+  .day-header:hover { background: #FAFAFA; }
+  .day-num { font-size: 0.78rem; font-weight: 600; color: #9CA3AF; text-transform: uppercase; letter-spacing: 0.5px; }
+  .day-title { font-family: 'Playfair Display', serif; font-size: 1.25rem; font-weight: 600; margin-top: 2px; }
+  .day-date { font-size: 0.83rem; color: #6B7280; margin-top: 2px; }
+  .phase-badge { padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; white-space: nowrap; flex-shrink: 0; }
+  .badge-switzerland { background: var(--blue-light); color: var(--blue); }
+  .badge-italy { background: var(--orange-light); color: var(--orange); }
+  .badge-shabbat { background: var(--green-light); color: var(--green); }
+  .badge-travel { background: var(--purple-light); color: var(--purple); }
+  .badge-home { background: var(--gray-mid); color: var(--gray); }
+
+  .day-body { padding: 0 20px 18px; border-top: 1px solid #F3F4F6; }
+  .detail-row { display: flex; gap: 12px; padding: 10px 0; border-bottom: 1px solid #F9FAFB; align-items: flex-start; }
+  .detail-row:last-of-type { border-bottom: none; }
+  .detail-icon { width: 28px; height: 28px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; margin-top: 1px; }
+  .detail-label { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: #9CA3AF; min-width: 80px; padding-top: 2px; }
+  .detail-text { flex: 1; font-size: 0.9rem; color: #374151; }
+  .warning-row .detail-text { color: #B45309; font-weight: 500; }
+  .warning-row .detail-icon { background: #FEF3C7; }
+  .shabbat-time { font-weight: 600; }
+  .shabbat-time .july-time, .shabbat-time .aug-time { display: none; }
+  .shabbat-time .july-time.show, .shabbat-time .aug-time.show { display: inline; }
+
+  /* EXPAND SECTIONS */
+  .expand-section { margin-top: 8px; }
+  .expand-btn { display: flex; align-items: center; gap: 8px; padding: 9px 14px; background: #F9FAFB; border: 1px solid #E5E7EB; border-radius: 8px; font-size: 0.83rem; font-weight: 500; color: #4B5563; cursor: pointer; width: 100%; text-align: left; transition: all 0.2s; font-family: 'Inter', sans-serif; margin-bottom: 4px; }
+  .expand-btn:hover { background: #F3F4F6; }
+  .expand-btn .chevron { margin-left: auto; transition: transform 0.2s; font-size: 0.7rem; }
+  .expand-btn.open .chevron { transform: rotate(180deg); }
+  .expand-panel { display: none; background: #FAFAFA; border: 1px solid #E5E7EB; border-radius: 8px; padding: 14px; font-size: 0.875rem; margin-bottom: 4px; }
+  .expand-panel.open { display: block; }
+  .hotel-name { font-weight: 600; color: #1a1a2e; font-size: 0.95rem; }
+  .hotel-desc { color: #6B7280; margin-top: 4px; }
+  .restaurant-item { padding: 10px 0; border-bottom: 1px solid #EFEFEF; }
+  .restaurant-item:last-child { border-bottom: none; }
+  .restaurant-name { font-weight: 600; color: #1a1a2e; }
+  .restaurant-meta { color: #6B7280; font-size: 0.82rem; margin-top: 3px; }
+  .kosher-badge { display: inline-block; padding: 2px 8px; border-radius: 12px; font-size: 0.7rem; font-weight: 600; background: var(--green-light); color: var(--green); margin-left: 6px; }
+  .no-kosher { color: #DC2626; font-weight: 600; padding: 8px 0; }
+
+  /* HEADER LEFT/RIGHT */
+  .day-header-left { flex: 1; }
+
+  /* MAP TAB */
+  .map-container { background: white; border-radius: var(--radius); box-shadow: var(--shadow); padding: 24px; }
+  .map-container h2 { font-size: 1.4rem; margin-bottom: 6px; }
+  .map-container p { color: #6B7280; font-size: 0.875rem; margin-bottom: 20px; }
+  svg.route-map { width: 100%; max-width: 600px; display: block; margin: 0 auto; }
+
+  /* PACKING TAB */
+  .packing-header { margin-bottom: 20px; }
+  .packing-header h2 { font-size: 1.4rem; }
+  .packing-header p { color: #6B7280; font-size: 0.875rem; margin-top: 4px; }
+  .packing-category { background: white; border-radius: var(--radius); box-shadow: var(--shadow); margin-bottom: 16px; overflow: hidden; }
+  .packing-cat-header { padding: 16px 20px; display: flex; align-items: center; gap: 10px; cursor: pointer; }
+  .packing-cat-header:hover { background: #FAFAFA; }
+  .packing-cat-icon { font-size: 1.2rem; }
+  .packing-cat-title { font-size: 1rem; font-weight: 600; flex: 1; }
+  .packing-cat-count { font-size: 0.8rem; color: #6B7280; }
+  .packing-items { padding: 0 20px 16px; border-top: 1px solid #F3F4F6; }
+  .packing-item { display: flex; align-items: center; gap: 10px; padding: 9px 0; border-bottom: 1px solid #F9FAFB; }
+  .packing-item:last-child { border-bottom: none; }
+  .packing-item input[type=checkbox] { width: 18px; height: 18px; accent-color: #1E3A5F; cursor: pointer; flex-shrink: 0; }
+  .packing-item label { cursor: pointer; font-size: 0.9rem; color: #374151; }
+  .packing-item.checked label { text-decoration: line-through; color: #9CA3AF; }
+  .packing-progress { height: 4px; background: #E5E7EB; border-radius: 2px; margin: 0 20px 12px; }
+  .packing-progress-bar { height: 100%; background: var(--green); border-radius: 2px; transition: width 0.3s; }
+  .pack-actions { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
+  .pack-btn { padding: 8px 16px; border-radius: 8px; font-size: 0.85rem; font-weight: 500; cursor: pointer; font-family: 'Inter', sans-serif; border: 1px solid #E5E7EB; background: white; color: #374151; transition: all 0.2s; }
+  .pack-btn:hover { background: #F3F4F6; }
+  .pack-btn.primary { background: #1E3A5F; color: white; border-color: #1E3A5F; }
+
+  /* BUDGET TAB */
+  .budget-header { margin-bottom: 20px; }
+  .budget-header h2 { font-size: 1.4rem; }
+  .budget-header p { color: #6B7280; font-size: 0.875rem; margin-top: 4px; }
+  .budget-controls { background: white; border-radius: var(--radius); box-shadow: var(--shadow); padding: 20px; margin-bottom: 20px; display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+  .budget-controls label { font-weight: 500; font-size: 0.9rem; }
+  .budget-controls input { width: 80px; padding: 8px 12px; border: 1px solid #D1D5DB; border-radius: 8px; font-size: 1rem; font-family: 'Inter', sans-serif; text-align: center; }
+  .budget-totals { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; }
+  .budget-total-card { background: white; border-radius: var(--radius); box-shadow: var(--shadow); padding: 20px; text-align: center; }
+  .budget-total-card .label { font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: #9CA3AF; }
+  .budget-total-card .amount { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; color: #1E3A5F; margin-top: 4px; }
+  .budget-breakdown { background: white; border-radius: var(--radius); box-shadow: var(--shadow); padding: 20px; }
+  .budget-breakdown h3 { font-size: 1rem; font-weight: 600; margin-bottom: 16px; }
+  .budget-bar-row { margin-bottom: 14px; }
+  .budget-bar-label { display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 5px; }
+  .budget-bar-label .name { color: #374151; font-weight: 500; }
+  .budget-bar-label .val { color: #6B7280; }
+  .budget-bar-track { background: #F3F4F6; border-radius: 4px; height: 10px; overflow: hidden; }
+  .budget-bar-fill { height: 100%; border-radius: 4px; transition: width 0.4s; }
+  .bar-hotel { background: #2563EB; }
+  .bar-flights { background: #7C3AED; }
+  .bar-trains { background: #0891B2; }
+  .bar-food { background: #EA580C; }
+  .bar-activities { background: #16A34A; }
+
+  /* PRINT BUTTON */
+  .print-btn { position: fixed; bottom: 24px; right: 24px; background: #1E3A5F; color: white; border: none; border-radius: 50%; width: 52px; height: 52px; font-size: 1.2rem; cursor: pointer; box-shadow: 0 4px 16px rgba(0,0,0,0.25); z-index: 1000; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
+  .print-btn:hover { background: #2D6A4F; transform: scale(1.08); }
+
+  /* RESPONSIVE */
+  @media (max-width: 600px) {
+    .tab-content { padding: 16px 12px; }
+    .nav-tab { padding: 12px 14px; font-size: 0.82rem; }
+    .budget-totals { grid-template-columns: 1fr; }
+    .day-title { font-size: 1.1rem; }
+    .reminders-bar { font-size: 0.75rem; }
+  }
+
+  /* PRINT */
+  @media print {
+    .print-btn, .nav-tabs, .version-bar, .reminders-bar, .expand-btn { display: none !important; }
+    .tab-content { display: block !important; padding: 0; }
+    .day-card { break-inside: avoid; box-shadow: none; border: 1px solid #DDD; }
+    .expand-panel { display: block !important; }
+    body { background: white; }
+    .site-header { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <h1>🗺 Switzerland &amp; Italy Family Adventure</h1>
+  <div class="subtitle">13 Days &nbsp;·&nbsp; Zurich → Venice → Florence → Rome → Capri</div>
+</header>
+
+<div class="version-bar">
+  <span class="version-label">Travel dates:</span>
+  <div class="toggle-group">
+    <button class="toggle-btn active" id="btn-july" onclick="setVersion('july')">Early July</button>
+    <button class="toggle-btn" id="btn-august" onclick="setVersion('august')">Mid-August</button>
+  </div>
+  <div class="version-banner july" id="banner-july">☀️ Early July — Shabbat ends later (longer Fridays). Colosseum slightly less crowded.</div>
+  <div class="version-banner august" id="banner-august" style="display:none">🏖 Mid-August — Peak season. Book everything well in advance. Shabbat ends earlier.</div>
+</div>
+
+<div class="reminders-bar">
+  <div class="reminders-inner">
+    <span class="reminder-item">Book Colosseum tickets online weeks in advance</span>
+    <span class="reminder-item">Contact Chabad Venice for Shabbat meals: info@jewishvenice.org</span>
+    <span class="reminder-item">Reserve BaGhetto Rome well ahead</span>
+    <span class="reminder-item">Buy Swiss Travel Pass for 3+ day trips in Switzerland</span>
+    <span class="reminder-item">Confirm Shabbat key arrangements with Venice hotel</span>
+    <span class="reminder-item">Pack ALL food from Rome night before Capri day trip</span>
+    <span class="reminder-item">Book Colosseum tickets online weeks in advance</span>
+    <span class="reminder-item">Contact Chabad Venice for Shabbat meals: info@jewishvenice.org</span>
+    <span class="reminder-item">Reserve BaGhetto Rome well ahead</span>
+    <span class="reminder-item">Buy Swiss Travel Pass for 3+ day trips in Switzerland</span>
+    <span class="reminder-item">Confirm Shabbat key arrangements with Venice hotel</span>
+    <span class="reminder-item">Pack ALL food from Rome night before Capri day trip</span>
+  </div>
+</div>
+
+<nav class="nav-tabs">
+  <button class="nav-tab active" onclick="showTab('itinerary')">🗓 Itinerary</button>
+  <button class="nav-tab" onclick="showTab('map')">🗺 Map</button>
+  <button class="nav-tab" onclick="showTab('packing')">🎒 Packing</button>
+  <button class="nav-tab" onclick="showTab('budget')">💰 Budget</button>
+</nav>
+
+<!-- ======================== ITINERARY TAB ======================== -->
+<div id="tab-itinerary" class="tab-content active">
+
+<!-- DAY 1 -->
+<div class="day-card">
+  <div class="day-header" onclick="toggleCard(this)">
+    <div class="day-header-left">
+      <div class="day-num">Day 1 &nbsp;·&nbsp; Sunday</div>
+      <div class="day-title">LAX → Zurich</div>
+      <div class="day-date">Departure Day</div>
+    </div>
+    <span class="phase-badge badge-travel">✈ Travel</span>
+  </div>
+  <div class="day-body">
+    <div class="detail-row">
+      <div class="detail-icon" style="background:#F5F3FF">🚌</div>
+      <div class="detail-label">Transport</div>
+      <div class="detail-text">Flight LAX → ZRH ~12–13 hr via London or Frankfurt. Train ZRH Airport → Zurich HB: 10 min, CHF 6/person.</div>
+    </div>
+    <div class="detail-row">
+      <div class="detail-icon" style="background:#FEF3C7">🌅</div>
+      <div class="detail-label">Morning</div>
+      <div class="detail-text">Depart Los Angeles. Check in at airport, long-haul flight ahead.</div>
+    </div>
+    <div class="detail-row">
+      <div class="detail-icon" style="background:#E0F2FE">☁️</div>
+      <div class="detail-label">Afternoon</div>
+      <div class="detail-text">In transit — rest, movies, settle in.</div>
+    </div>
+    <div class="detail-row">
+      <div class="detail-icon" style="background:#FFF7ED">🍽</div>
+      <div class="detail-label">Dinner</div>
+      <div class="detail-text">Florentin Restaurant, Zurich (modern Israeli kosher). Reserve in advance.</div>
+    </div>
+    <div class="expand-section">
+      <button class="expand-btn" onclick="toggleExpand(this)">🏨 Hotel: Hotel Schweizerhof Zürich <span class="chevron">▼</span></button>
+      <div class="expand-panel">
+        <div class="hotel-name">Hotel Schweizerhof Zürich</div>
+        <div class="hotel-desc">Iconic 5-star hotel steps from Zurich HB. Classic Swiss elegance with family rooms, central location for all day trips.</div>
+      </div>
+      <button class="expand-btn" onclick="toggleExpand(this)">🥩 Kosher Restaurants in Zurich <span class="chevron">▼</span></button>
+      <div class="expand-panel">
+        <div class="restaurant-item">
+          <div class="restaurant-name">Florentin Restaurant <span class="kosher-badge">✓ Kosher</span></div>
+          <div class="restaurant-meta">Modern Israeli cuisine · Dinner only · Reserve ahead · Certified kosher</div>
+        </div>
+        <div class="restaurant-item">
+          <div class="restaurant-name">Babi's Bagel Shop <span class="kosher-badge">✓ Kosher</span></div>
+          <div class="restaurant-meta">Casual lunch spot · Bagels &amp; deli · Kosher certified</div>
+        </div>
+        <div class="restaurant-item">
+          <div class="restaurant-name">Koscher City <span class="kosher-badge">✓ Kosher</span></div>
+          <div class="restaurant-meta">Casual dining · Open daily · Good for quick meals</div>
+        </div>
+        <div class="restaurant-item">
+          <div class="restaurant-name">Olive Garden Zürich <span class="kosher-badge">✓ Kosher</span></div>
+          <div class="restaurant-meta">Israeli cuisine · Dinner · Great alternative to Florentin</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DAY 2 -->
+<div class="day-card">
+  <div class="day-header" onclick="toggleCard(this)">
+    <div class="day-header-left">
+      <div class="day-num">Day 2 &nbsp;·&nbsp; Monday</div>
+      <div class="day-title">Zurich City Day</div>
+      <div class="day-date">Old Town · Watches · Lake</div>
+    </div>
+    <span class="phase-badge badge-switzerland">🇨🇭 Switzerland</span>
+  </div>
+  <div class="day-body">
+    <div class="detail-row">
+      <div class="detail-icon" style="background:#EFF6FF">🚋</div>
+      <div class="detail-label">Transport</div>
+      <div class="detail-text">On foot and tram within Zurich. Swiss Travel Pass covers trams.</div>
+    </div>
+    <div class="detail-row">
+      <div class="detail-icon" style="background:#FEF3C7">🌅</div>
+      <div class="detail-label">Morning</div>
+      <div class="detail-text">Zurich Old Town (Altstadt) walk. Bahnhofstrasse watch boutiques: Patek Philippe, IWC, Audemars Piguet, Bucherer flagship.</div>
+    </div>
+    <div class="detail-row">
+      <div class="detail-icon" style="background:#E0F2FE">☀️</div>
+      <div class="detail-label">Afternoon</div>
+      <div class="detail-text">Beyer Watch Museum (free, inside Bahnhofstrasse store). Lake Zurich promenade — boat ride optional.</div>
+    </div>
+    <div class="detail-row">
+      <div class="detail-icon" style="background:#FFF7ED">🍽</div>
+      <div class="detail-label">Lunch</div>
+      <div class="detail-text">Babi's Bagel Shop (kosher certified, casual).</div>
+    </div>
+    <div class="detail-row">
+      <div class="detail-icon" style="background:#FFF7ED">🍽</div>
+      <div class="detail-label">Dinner</div>
+      <div class="detail-text">Florentin Restaurant (modern Israeli kosher). Reserve ahead.</div>
+    </div>
+    <div class="expand-section">
+      <button class="expand-btn" onclick="toggleExpand(this)">🏨 Hotel: Hotel Schweizerhof Zürich <span class="chevron">▼</span></button>
+      <div class="expand-panel">
+        <div class="hotel-name">Hotel Schweizerhof Zürich</div>
+        <div class="hotel-desc">Night 2 of 5. Central location ideal for all Zurich day trips.</div>
+      </div>
+      <button class="expand-btn" onclick="toggleExpand(this)">🥩 Kosher Restaurants in Zurich <span class="chevron">▼</span></button>
+      <div class="expand-panel">
+        <div class="restaurant-item"><div class="restaurant-name">Florentin Restaurant <span class="kosher-badge">✓ Kosher</span></div><div class="restaurant-meta">Modern Israeli · Dinner only · Reserve ahead</div></div>
+        <div class="restaurant-item"><div class="restaurant-name">Babi's Bagel Shop <span class="kosher-badge">✓ Kosher</span></div><div class="restaurant-meta">Casual lunch · Open daily</div></div>
+        <div class="restaurant-item"><div class="restaurant-name">Koscher City <span class="kosher-badge">✓ Kosher</span></div><div class="restaurant-meta">Casual daily dining</div></div>
+        <div class="restaurant-item"><div class="restaurant-name">Olive Garden Zürich <span class="kosher-badge">✓ Kosher</span></div><div class="restaurant-meta">Israeli cuisine · Evening</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DAY 3 -->
+<div class="day-card">
+  <div class="day-header" onclick="toggleCard(this)">
+    <div class="day-header-left">
+      <div class="day-num">Day 3 &nbsp;·&nbsp; Tuesday</div>
+      <div class="day-title">Lucerne Day Trip</div>
+      <div class="day-date">Chapel Bridge · Mount Rigi · Lake</div>
+    </div>
+    <span class="phase-badge badge-switzerland">🇨🇭 Switzerland</span>
+  </div>
+  <div class="day-body">
+    <div class="detail-row">
+      <div class="detail-icon" style="background:#EFF6FF">🚂</div>
+      <div class="detail-label">Transport</div>
+      <div class="detail-text">Train Zurich HB → Lucerne: 45 min, CHF 24/person (covered by Swiss Travel Pass).</div>
+    </div>
+    <div class="detail-row">
+      <div class="detail-icon" style="background:#FEF3C7">🌅</div>
+      <div class="detail-label">Morning</div>
+      <div class="detail-text">Lucerne Old Town walk. Kapellbrücke (Chapel Bridge) — Europe's oldest covered wooden bridge.</div>
+    </div>
+    <div class="detail-row">
+      <div class="detail-icon" style="background:#E0F2FE">⛰</div>
+      <div class="detail-label">Afternoon</div>
+      <div class="detail-text">Boat cruise on Lake Lucerne (30 min). Train to Mount Rigi (~1 hr 5 min total) for panoramic Alps views. Return to Zurich by evening.</div>
+    </div>
+    <div class="detail-row warning-row">
+      <div class="detail-icon">⚠️</div>
+      <div class="detail-label">Warning</div>
+      <div class="detail-text">NO kosher food in Lucerne — pack lunch from Zurich before departing.</div>
+    </div>
+    <div class="expand-section">
+      <button class="expand-btn" onclick="toggleExpand(this)">🏨 Hotel: Hotel Schweizerhof Zürich <span class="chevron">▼</span></button>
+      <div class="expand-panel"><div class="hotel-name">Hotel Schweizerhof Zürich</div><div class="hotel-desc">Night 3 of 5. Return to Zurich for dinner.</div></div>
+      <button class="expand-btn" onclick="toggleExpand(this)">🥩 Kosher in Lucerne <span class="chevron">▼</span></button>
+      <div class="expand-panel"><div class="no-kosher">⚠️ No kosher restaurants in Lucerne. Pack lunch and snacks from Zurich.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- DAY 4 -->
+<div class="day-card">
+  <div class="day-header" onclick="toggleCard(this)">
+    <div class="day-header-left">
+      <div class="day-num">Day 4 &nbsp;·&nbsp; Wednesday</div>
+      <div class="day-title">Rhine Falls + Lindt Chocolate</div>
+      <div class="day-date">Europe's Largest Waterfall</div>
+    </div>
+    <span class="phase-badge badge-switzerland">🇨🇭 Switzerland</span>
+  </div>
+  <div class="day-body">
+    <div class="detail-row">
+      <div class="detail-icon" style="background:#EFF6FF">🚂</div>
+      <div class="detail-label">Transport</div>
+      <div class="detail-text">Train Zurich → Schloss Laufen am Rheinfall: ~40 min.</div>
+    </div>
+    <div class="detail-row">
+      <div class="detail-icon" style="background:#FEF3C7">💦</div>
+      <div class="detail-label">Morning</div>
+      <div class="detail-text">Rhine Falls — 2–3 hours. Take the boat ride right up to the central rock. Europe's largest waterfall by volume.</div>
+    </div>
+    <div class="detail-row">
+      <div class="detail-icon" style="background:#E0F2FE">🍫</div>
+      <div class="detail-label">Afternoon</div>
+      <div class="detail-text">Lindt Home of Chocolate, Kilchberg (near Zurich). Interactive museum — experience only, as most Lindt products are not kosher certified.</div>
+    </div>
+    <div class="detail-row warning-row">
+      <div class="detail-icon">⚠️</div>
+      <div class="detail-label">Warning</div>
+      <div class="detail-text">Pack lunch from Zurich. Most Lindt chocolate is NOT kosher — visit for the experience, not the chocolate.</div>
+    </div>
+    <div class="expand-section">
+      <button class="expand-btn" onclick="toggleExpand(this)">🏨 Hotel: Hotel Schweizerhof Zürich <span class="chevron">▼</span></button>
+      <div class="expand-panel"><div class="hotel-name">Hotel Schweizerhof Zürich</div><div class="hotel-desc">Night 4 of 5.</div></div>
+      <button class="expand-btn" onclick="toggleExpand(this)">🥩 Kosher on this Route <span class="chevron">▼</span></button>
+      <div class="expand-panel"><div class="no-kosher">⚠️ No kosher options at Rhine Falls or Lindt — pack all food from Zurich. Dinner at Florentin or Olive Garden on return.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- DAY 5 -->
+<div class="day-card">
+  <div class="day-header" onclick="toggleCard(this)">
+    <div class="day-header-left">
+      <div class="day-num">Day 5 &nbsp;·&nbsp; Thursday</div>
+      <div class="day-title">Zurich Free Day</div>
+      <div class="day-date">Uetliberg · Kosher Shopping · Last Zurich Night</div>
+    </div>
+    <span class="phase-badge badge-switzerland">🇨🇭 Switzerland</span>
+  </div>
+  <div class="day-body">
+    <div class="detail-row">
+      <div class="detail-icon" style="background:#EFF6FF">🚋</div>
+      <div class="detail-label">Transport</div>
+      <div class="detail-text">Optional: S-Bahn to Uetliberg (30 min) + 1 hr hike with panoramic city views.</div>
+    </div>
+    <div class="detail-row">
+      <div class="detail-icon" style="background:#FEF3C7">🌄</div>
+      <div class="detail-label">Morning</div>
+      <div class="detail-text">Optional Uetliberg hike — best panoramic views of Zurich and the Alps. Otherwise, explore neighborhoods at leisure.</div>
+    </div>
+    <div class="detail-row">
+      <div class="detail-icon" style="background:#E0F2FE">🛒</div>
+      <div class="detail-label">Afternoon</div>
+      <div class="detail-text">Buy kosher food supplies for Friday travel day and Shabbat in Venice. Stock up on snacks, sealed meals, and Shabbat essentials.</div>
+    </div>
+    <div class="detail-row">
+      <div class="detail-icon" style="background:#FFF7ED">🍽</div>
+      <div class="detail-label">Dinner</div>
+      <div class="detail-text">Last dinner in Zurich — Florentin or Olive Garden Zürich (kosher Israeli).</div>
+    </div>
+    <div class="detail-row">
+      <div class="detail-icon" style="background:#D1FAE5">📦</div>
+      <div class="detail-label">Food notes</div>
+      <div class="detail-text">This is your last chance to stock up on kosher food before Venice (where only Chabad Shabbat meals are available).</div>
+    </div>
+    <div class="expand-section">
+      <button class="expand-btn" onclick="toggleExpand(this)">🏨 Hotel: Hotel Schweizerhof Zürich <span class="chevron">▼</span></button>
+      <div class="expand-panel"><div class="hotel-name">Hotel Schweizerhof Zürich</div><div class="hotel-desc">Night 5 of 5 in Zurich. Early departure tomorrow — confirm 6:30am checkout.</div></div>
+      <button class="expand-btn" onclick="toggleExpand(this)">🥩 Kosher in Zurich <span class="chevron">▼</span></button>
+      <div class="expand-panel">
+        <div class="restaurant-item"><div class="restaurant-name">Florentin Restaurant <span class="kosher-badge">✓ Kosher</span></div><div class="restaurant-meta">Modern Israeli · Dinner</div></div>
+        <div class="restaurant-item"><div class="restaurant-name">Olive Garden Zürich <span class="kosher-badge">✓ Kosher</span></div><div class="restaurant-meta">Israeli cuisine · Dinner</div></div>
+        <div class="restaurant-item"><div class="restaurant-name">Babi's Bagel Shop <span class="kosher-badge">✓ Kosher</span></div><div class="restaurant-meta">Lunch</div></div>
+        <div class="restaurant-item"><div class="restaurant-name">Koscher City <span class="kosher-badge">✓ Kosher</span></div><div class="restaurant-meta">Daily</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DAY 6 -->
+<div class="day-card">
+  <div class="day-header" onclick="toggleCard(this)">
+    <div class="day-header-left">
+      <div class="day-num">Day 6 &nbsp;·&nbsp; Friday</div>
+      <div class="day-title">Zurich → Venice</div>
+      <div class="day-date">Travel Day · Shabbat Begins</div>
+    </div>
+    <span class="phase-badge badge-travel">✈ Travel</span>
+  </div>
+  <div class="day-body">
+    <div class="detail-row">
+      <div class="detail-icon" style="background:#F5F3FF">🚂</div>
+      <div class="detail-label">Transport</div>
+      <div class="detail-text">Leave hotel 6:30am. Train 1: Zurich HB → Milan Centrale ~3.5 hr (EuroCity). Train 2: Milan Centrale → Venice Santa Lucia ~2.5 hr (Frecciarossa). Arrive Venice 1–2pm. Vaporetto Line 1 or 2 to hotel.</div>
+    </div>
+    <div class="detail-row">
+      <div class="detail-icon" style="background:#FEF3C7">🌅</div>
+      <div class="detail-label">Morning</div>
+      <div class="detail-text">Early departure from Zurich 6:30am. Scenic train journey through the Alps into Italy.</div>
+    </div>
+    <div class="detail-row">
+      <div class="detail-icon" style="background:#E0F2FE">⛵</div>
+      <div class="detail-label">Afternoon</div>
+      <div class="detail-text">Arrive Venice 1–2pm. Check in to hotel. Take the vaporetto (water bus) through the Grand Canal. Prepare for Shabbat — candles, challah, wine.</div>
+    </div>
+    <div class="detail-row">
+      <div class="detail-icon" style="background:#D1FAE5">🕯</div>
+      <div class="detail-label">Shabbat</div>
+      <div class="detail-text shabbat-time">
+        Candle lighting:
+        <span class="july-time show">8:45 pm (Early July)</span>
+        <span class="aug-time">8:00 pm (Mid-August)</span>
+      </div>
+    </div>
+    <div class="detail-row warning-row">
+      <div class="detail-icon">⚠️</div>
+      <div class="detail-label">Warning</div>
+      <div class="detail-text">Confirm Shabbat key arrangements with hotel BEFORE arrival. Contact Chabad Venice for Shabbat meals: info@jewishvenice.org</div>
+    </div>
+    <div class="expand-section">
+      <button class="expand-btn" onclick="toggleExpand(this)">🏨 Hotel Options in Venice <span class="chevron">▼</span></button>
+      <div class="expand-panel">
+        <div class="hotel-name">Palazzo Cendon (Cannaregio)</div>
+        <div class="hotel-desc">Located in Cannaregio — close to the Jewish Ghetto. Ideal for Shabbat walking distance to synagogue.</div>
+        <div style="margin-top:12px"><div class="hotel-name">Hotel Moresco (Dorsoduro)</div>
+        <div class="hotel-desc">Elegant boutique hotel in quiet Dorsoduro. Slightly further from Ghetto but beautiful neighborhood.</div></div>
+      </div>
+      <button class="expand-btn" onclick="toggleExpand(this)">🥩 Kosher in Venice <span class="chevron">▼</span></button>
+      <div class="expand-panel">
+        <div class="restaurant-item">
+          <div class="restaurant-name">Chabad Venice — Jewish Ghetto <span class="kosher-badge">✓ Kosher</span></div>
+          <div class="restaurant-meta">Shabbat meals only · Must reserve in advance · info@jewishvenice.org</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DAY 7 -->
+<div class="day-card">
+  <div class="day-header" onclick="toggleCard(this)">
+    <div class="day-header-left">
+      <div class="day-num">Day 7 &nbsp;·&nbsp; Saturday</div>
+      <div class="day-title">Shabbat in Venice</div>
+      <div class="day-date">Jewish Ghetto · Synagogue · Rest</div>
+    </div>
+    <span class="phase-badge badge-shabbat">✡ Shabbat</span>
+  </div>
+  <div class="day-body">
+    <div class="detail-row">
+      <div class="detail-icon" style="background:#F0FDF4">🚶</div>
+      <div class="detail-label">Transport</div>
+      <div class="detail-text">On foot only — no vaporettos or taxis on Shabbat. Jewish Ghetto is walkable from Cannaregio hotels.</div>
+    </div>
+    <div class="detail-row">
+      <div class="detail-icon" style="background:#FEF3C7">🕍</div>
+      <div class="detail-label">Morning</div>
+      <div class="detail-text">Morning services at Scuola Grande Tedesca (German Synagogue, founded 1528) or Chabad in the Jewish Ghetto.</div>
+    </div>
+    <div class="detail-row">
+      <div class="detail-icon" style="background:#E0F2FE">🏛</div>
+      <div class="detail-label">Afternoon</div>
+      <div class="detail-text">Walk the Jewish Ghetto — one of Europe's oldest, dating from 1516. Campo del Ghetto Nuovo. Jewish Museum. Leisurely stroll along canals.</div>
+    </div>
+    <div class="detail-row">
+      <div class="detail-icon" style="background:#FFF7ED">🍽</div>
+      <div class="detail-label">All Meals</div>
+      <div class="detail-text">All meals via Chabad Venice or hotel. MUST confirm arrangements in advance: info@jewishvenice.org</div>
+    </div>
+    <div class="detail-row">
+      <div class="detail-icon" style="background:#D1FAE5">🌙</div>
+      <div class="detail-label">Shabbat ends</div>
+      <div class="detail-text shabbat-time">
+        <span class="july-time show">~10:00 pm (Early July)</span>
+        <span class="aug-time">~9:15 pm (Mid-August)</span>
+      </div>
+    </div>
+    <div class="expand-section">
+      <button class="expand-btn" onclick="toggleExpand(this)">🏨 Hotel: Venice (Palazzo Cendon or Hotel Moresco) <span class="chevron">▼</span></button>
+      <div class="expand-panel"><div class="hotel-name">Venice Hotel</div><div class="hotel-desc">Stay put — Shabbat day. Enjoy the calm of Venice on Shabbat, away from the weekday tourist crowds.</div></div>
+      <button class="expand-btn" onclick="toggleExpand(this)">🥩 Kosher in Venice <span class="chevron">▼</span></button>
+      <div class="expand-panel">
+        <div class="restaurant-item">
+          <div class="restaurant-name">Chabad Venice <span class="kosher-badge">✓ Kosher</span></div>
+          <div class="restaurant-meta">All Shabbat meals · Reserve well in advance · info@jewishvenice.org</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DAY 8 -->
+<div class="day-card">
+  <div class="day-header" onclick="toggleCard(this)">
+    <div class="day-header-left">
+      <div class="day-num">Day 8 &nbsp;·&nbsp; Sunday</div>
+      <div class="day-title">Venice → Lake Como → Florence</div>
+      <div class="day-date">Epic Journey Day · 4 Trains</div>
+    </div>
+    <span class="phase-badge badge-travel">✈ Travel</span>
+  </div>
+  <div class="day-body">
+    <div class="detail-row">
+      <div class="detail-icon" style="background:#F5F3FF">🚂</div>
+      <div class="detail-label">Transport</div>
+      <div class="detail-text">Store luggage at Venice Santa Lucia left luggage (6am–11pm, €6/bag). Train 1: Venice → Milan 8:30am Frecciarossa 2h15. Store bags at KiBag inside Milano Centrale. Train 2: Milan → Como San Giovanni 11:10am Trenord 40 min. Train 3: Como → Milan 4:50pm 40 min. Retrieve luggage. Train 4: Milan → Florence SMN 6:10pm Frecciarossa 1h50. Arrive Florence ~8pm.</div>
+    </div>
+    <div class="detail-row">
+      <div class="detail-icon" style="background:#FEF3C7">⛵</div>
+      <div class="detail-label">Morning</div>
+      <div class="detail-text">Store luggage in Venice, catch 8:30am train to Milan, then onward to Como (~noon arrival).</div>
+    </div>
+    <div class="detail-row">
+      <div class="detail-icon" style="background:#E0F2FE">🏔</div>
+      <div class="detail-label">Afternoon</div>
+      <div class="detail-text">Lake Como lakefront walk, ferry ride. Como–Brunate Funicular (7 min, panoramic Alps views). Depart Como ~4:30pm back to Milan, then Florence.</div>
+    </div>
+    <div class="detail-row">
+      <div class="detail-icon" style="background:#FFF7ED">🍽</div>
+      <div class="detail-label">Dinner</div>
+      <div class="detail-text">Ruth's Kosher Restaurant, Via Farini 2a, Florence (open until 10:30–11pm). Arrive hungry from long travel day!</div>
+    </div>
+    <div class="expand-section">
+      <button class="expand-btn" onclick="toggleExpand(this)">🏨 Hotel Options in Florence <span class="chevron">▼</span></button>
+      <div class="expand-panel">
+        <div class="hotel-name">25hours Hotel Florence</div>
+        <div class="hotel-desc">Design hotel in central Florence, walking distance to all major sights.</div>
+        <div style="margin-top:12px"><div class="hotel-name">Hotel Davanzati</div>
+        <div class="hotel-desc">Charming family-run hotel steps from Piazza della Repubblica. Great value, excellent location.</div></div>
+      </div>
+      <button class="expand-btn" onclick="toggleExpand(this)">🥩 Kosher in Florence <span class="chevron">▼</span></button>
+      <div class="expand-panel">
+        <div class="restaurant-item">
+          <div class="restaurant-name">Ruth's Kosher Restaurant <span class="kosher-badge">✓ Kosher</span></div>
+          <div class="restaurant-meta">Via Farini 2a · Lunch &amp; Dinner · Closed Shabbat daytime · Mediterranean &amp; Israeli cuisine</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DAY 9 -->
+<div class="day-card">
+  <div class="day-header" onclick="toggleCard(this)">
+    <div class="day-header-left">
+      <div class="day-num">Day 9 &nbsp;·&nbsp; Monday</div>
+      <div class="day-title">Florence</div>
+      <div class="day-date">Piazzale Michelangelo · Ponte Vecchio · Duomo</div>
+    </div>
+    <span class="phase-badge badge-italy">🇮🇹 Italy</span>
+  </div>
+  <div class="day-body">
+    <div class="detail-row">
+      <div class="detail-icon" style="background:#FFF7ED">🚌</div>
+      <div class="detail-label">Transport</div>
+      <div class="detail-text">On foot and local bus. Bus 12 or 13 up to Piazzale Michelangelo, or 30-min uphill walk.</div>
+    </div>
+    <div class="detail-row">
+      <div class="detail-icon" style="background:#FEF3C7">🌄</div>
+      <div class="detail-label">Morning</div>
+      <div class="detail-text">Go early (8–9am) to Piazzale Michelangelo — best panoramic view of Florence, quieter before crowds. Ponte Vecchio walk.</div>
+    </div>
+    <div class="detail-row">
+      <div class="detail-icon" style="background:#E0F2FE">⛪</div>
+      <div class="detail-label">Afternoon</div>
+      <div class="detail-text">Duomo exterior and Piazza della Repubblica. Gelateria (check kosher). Window shopping and cafes.</div>
+    </div>
+    <div class="detail-row">
+      <div class="detail-icon" style="background:#FFF7ED">🍽</div>
+      <div class="detail-label">Lunch &amp; Dinner</div>
+      <div class="detail-text">Ruth's Kosher Restaurant, Via Farini 2a (open both lunch and dinner).</div>
+    </div>
+    <div class="expand-section">
+      <button class="expand-btn" onclick="toggleExpand(this)">🏨 Hotel: Florence (25hours or Davanzati) <span class="chevron">▼</span></button>
+      <div class="expand-panel"><div class="hotel-name">Florence Hotel</div><div class="hotel-desc">Night 2 of 2 in Florence.</div></div>
+      <button class="expand-btn" onclick="toggleExpand(this)">🥩 Kosher in Florence <span class="chevron">▼</span></button>
+      <div class="expand-panel">
+        <div class="restaurant-item">
+          <div class="restaurant-name">Ruth's Kosher Restaurant <span class="kosher-badge">✓ Kosher</span></div>
+          <div class="restaurant-meta">Via Farini 2a · Open lunch &amp; dinner · Only kosher option in Florence</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DAY 10 -->
+<div class="day-card">
+  <div class="day-header" onclick="toggleCard(this)">
+    <div class="day-header-left">
+      <div class="day-num">Day 10 &nbsp;·&nbsp; Tuesday</div>
+      <div class="day-title">Florence → Rome</div>
+      <div class="day-date">High-Speed Train · Arrive the Eternal City</div>
+    </div>
+    <span class="phase-badge badge-travel">✈ Travel</span>
+  </div>
+  <div class="day-body">
+    <div class="detail-row">
+      <div class="detail-icon" style="background:#F5F3FF">🚂</div>
+      <div class="detail-label">Transport</div>
+      <div class="detail-text">Train Florence SMN → Roma Termini: 1h30min Frecciarossa. Aim for 1–2pm departure (morning free in Florence).</div>
+    </div>
+    <div class="detail-row">
+      <div class="detail-icon" style="background:#FEF3C7">🌅</div>
+      <div class="detail-label">Morning</div>
+      <div class="detail-text">Free morning in Florence — last gelato, more Ponte Vecchio, or leisurely breakfast.</div>
+    </div>
+    <div class="detail-row">
+      <div class="detail-icon" style="background:#E0F2FE">🏛</div>
+      <div class="detail-label">Afternoon</div>
+      <div class="detail-text">Arrive Rome ~3–4pm. Check in to hotel. First glimpse of the Eternal City.</div>
+    </div>
+    <div class="detail-row">
+      <div class="detail-icon" style="background:#FFF7ED">🍽</div>
+      <div class="detail-label">Dinner</div>
+      <div class="detail-text">BaGhetto Ristorante, Via del Portico D'Ottavia 57 (Jewish-Roman and Middle Eastern. Famous carciofi alla giudìa. Open 6–11pm. Book ahead!)</div>
+    </div>
+    <div class="detail-row warning-row">
+      <div class="detail-icon">⚠️</div>
+      <div class="detail-label">Warning</div>
+      <div class="detail-text">Reserve BaGhetto well in advance — very popular, especially in summer.</div>
+    </div>
+    <div class="expand-section">
+      <button class="expand-btn" onclick="toggleExpand(this)">🏨 Hotel Options in Rome <span class="chevron">▼</span></button>
+      <div class="expand-panel">
+        <div class="hotel-name">Hotel Grifo — Monti Neighborhood</div>
+        <div class="hotel-desc">Family rooms, rooftop terrace, 15-min walk to Colosseum and Jewish Ghetto. Charming Monti neighborhood with great restaurants.</div>
+        <div style="margin-top:12px"><div class="hotel-name">Internazionale Domus</div>
+        <div class="hotel-desc">Near Spanish Steps, central location, spacious family rooms.</div></div>
+      </div>
+      <button class="expand-btn" onclick="toggleExpand(this)">🥩 Kosher in Rome <span class="chevron">▼</span></button>
+      <div class="expand-panel">
+        <div class="restaurant-item"><div class="restaurant-name">BaGhetto <span class="kosher-badge">✓ Kosher</span></div><div class="restaurant-meta">Via del Portico D'Ottavia 57 · Meat · Jewish-Roman &amp; Middle Eastern · Sun–Thu + Sat night · 6–11pm · Reserve ahead</div></div>
+        <div class="restaurant-item"><div class="restaurant-name">Nonna Betta <span class="kosher-badge">✓ Kosher</span></div><div class="restaurant-meta">Via del Portico D'Ottavia 16 · Roman-Jewish home cooking · Warm atmosphere</div></div>
+        <div class="restaurant-item"><div class="restaurant-name">Yotvata <span class="kosher-badge">✓ Kosher</span></div><div class="restaurant-meta">Piazza Cenci · Meat · Excellent quality · Popular with locals</div></div>
+        <div class="restaurant-item"><div class="restaurant-name">Bona Pizza <span class="kosher-badge">✓ Kosher</span></div><div class="restaurant-meta">Via del Portico D'Ottavia 7 · Dairy/Parve · Pizza al taglio by the slice</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DAY 11 -->
+<div class="day-card">
+  <div class="day-header" onclick="toggleCard(this)">
+    <div class="day-header-left">
+      <div class="day-num">Day 11 &nbsp;·&nbsp; Wednesday</div>
+      <div class="day-title">Rome: Colosseum + Jewish Ghetto</div>
+      <div class="day-date">Ancient Rome · 2000 Years of History</div>
+    </div>
+    <span class="phase-badge badge-italy">🇮🇹 Italy</span>
+  </div>
+  <div class="day-body">
+    <div class="detail-row">
+      <div class="detail-icon" style="background:#FFF7ED">🚶</div>
+      <div class="detail-label">Transport</div>
+      <div class="detail-text">15–20 min walk from Monti hotel to Colosseum. Jewish Ghetto walking distance from Forum.</div>
+    </div>
+    <div class="detail-row">
+      <div class="detail-icon" style="background:#FEF3C7">🏟</div>
+      <div class="detail-label">Morning</div>
+      <div class="detail-text">Colosseum + Roman Forum (book timed-entry tickets online — weeks in advance in August). Allow 2–3 hours. Palatine Hill included in ticket.</div>
+    </div>
+    <div class="detail-row">
+      <div class="detail-icon" style="background:#E0F2FE">🕍</div>
+      <div class="detail-label">Afternoon</div>
+      <div class="detail-text">Jewish Ghetto walk — Via del Portico D'Ottavia, Portico d'Ottavia ruins (ancient Roman gate), Great Synagogue of Rome, Piazza delle Cinque Scole.</div>
+    </div>
+    <div class="detail-row">
+      <div class="detail-icon" style="background:#FFF7ED">🍕</div>
+      <div class="detail-label">Lunch</div>
+      <div class="detail-text">Bona Pizza, Via del Portico D'Ottavia 7 (kosher pizza al taglio by the slice).</div>
+    </div>
+    <div class="detail-row">
+      <div class="detail-icon" style="background:#FFF7ED">🍽</div>
+      <div class="detail-label">Dinner</div>
+      <div class="detail-text">Yotvata Restaurant, Piazza Cenci — or Nonna Betta, Via del Portico D'Ottavia 16.</div>
+    </div>
+    <div class="detail-row warning-row">
+      <div class="detail-icon">⚠️</div>
+      <div class="detail-label">Warning</div>
+      <div class="detail-text">Book Colosseum tickets online weeks in advance — especially for August. Same-day tickets sell out by 9am.</div>
+    </div>
+    <div class="expand-section">
+      <button class="expand-btn" onclick="toggleExpand(this)">🏨 Hotel: Rome (Hotel Grifo or Internazionale Domus) <span class="chevron">▼</span></button>
+      <div class="expand-panel"><div class="hotel-name">Rome Hotel</div><div class="hotel-desc">Night 2 of 3 in Rome.</div></div>
+      <button class="expand-btn" onclick="toggleExpand(this)">🥩 Kosher in Rome (Jewish Ghetto) <span class="chevron">▼</span></button>
+      <div class="expand-panel">
+        <div class="restaurant-item"><div class="restaurant-name">Bona Pizza <span class="kosher-badge">✓ Kosher</span></div><div class="restaurant-meta">Via del Portico D'Ottavia 7 · Dairy/Parve · Great for quick lunch</div></div>
+        <div class="restaurant-item"><div class="restaurant-name">Nonna Betta <span class="kosher-badge">✓ Kosher</span></div><div class="restaurant-meta">Via del Portico D'Ottavia 16 · Roman-Jewish home cooking</div></div>
+        <div class="restaurant-item"><div class="restaurant-name">Yotvata <span class="kosher-badge">✓ Kosher</span></div><div class="restaurant-meta">Piazza Cenci · Meat · Excellent</div></div>
+        <div class="restaurant-item"><div class="restaurant-name">BaGhetto <span class="kosher-badge">✓ Kosher</span></div><div class="restaurant-meta">Via del Portico D'Ottavia 57 · Meat · Reserve ahead</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DAY 12 -->
+<div class="day-card">
+  <div class="day-header" onclick="toggleCard(this)">
+    <div class="day-header-left">
+      <div class="day-num">Day 12 &nbsp;·&nbsp; Thursday</div>
+      <div class="day-title">Capri Day Trip</div>
+      <div class="day-date">Isle of Capri · Blue Grotto · Gardens of Augustus</div>
+    </div>
+    <span class="phase-badge badge-italy">🇮🇹 Italy</span>
+  </div>
+  <div class="day-body">
+    <div class="detail-row">
+      <div class="detail-icon" style="background:#FFF7ED">🚂</div>
+      <div class="detail-label">Transport</div>
+      <div class="detail-text">Luggage stays at Rome hotel — daypack only. Train Roma Termini → Napoli Centrale: 7–7:30am Frecciarossa 1h10. Ferry Naples Molo Beverello → Capri: 50 min, €20–25/person (SNAV or Caremar). Funicular up to Capri Town: €2. Ferry back ~5pm. Train Naples → Rome: arrives 6:30–7pm.</div>
+    </div>
+    <div class="detail-row">
+      <div class="detail-icon" style="background:#FEF3C7">🌊</div>
+      <div class="detail-label">Morning</div>
+      <div class="detail-text">Very early departure — 7am train from Rome to Naples, ferry to Capri. Arrive ~10–11am. Funicular up to Capri Town.</div>
+    </div>
+    <div class="detail-row">
+      <div class="detail-icon" style="background:#E0F2FE">🌺</div>
+      <div class="detail-label">Afternoon</div>
+      <div class="detail-text">Gardens of Augustus (panoramic views of Faraglioni rocks), Villa Jovis viewpoint, boat tour around the island (€15–20/person). Catch ferry back ~5pm.</div>
+    </div>
+    <div class="detail-row">
+      <div class="detail-icon" style="background:#FFF7ED">🍽</div>
+      <div class="detail-label">Dinner</div>
+      <div class="detail-text">Pick up luggage at Rome hotel. Last dinner — BaGhetto or Yotvata in the Jewish Ghetto.</div>
+    </div>
+    <div class="detail-row warning-row">
+      <div class="detail-icon">⚠️</div>
+      <div class="detail-label">Warning</div>
+      <div class="detail-text">⚠️ ZERO kosher food on Capri — pack ALL food from Rome the night before. Full day from Rome supplies needed.</div>
+    </div>
+    <div class="expand-section">
+      <button class="expand-btn" onclick="toggleExpand(this)">🏨 Hotel: Rome (Hotel Grifo or Internazionale Domus) <span class="chevron">▼</span></button>
+      <div class="expand-panel"><div class="hotel-name">Rome Hotel</div><div class="hotel-desc">Night 3 of 3. Leave luggage here during Capri day trip.</div></div>
+      <button class="expand-btn" onclick="toggleExpand(this)">🥩 Kosher on Capri <span class="chevron">▼</span></button>
+      <div class="expand-panel"><div class="no-kosher">⚠️ Absolutely no kosher food on Capri. Pack protein bars, sealed kosher meals, fruit, and snacks from Rome the night before. This is non-negotiable.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- DAY 13 -->
+<div class="day-card">
+  <div class="day-header" onclick="toggleCard(this)">
+    <div class="day-header-left">
+      <div class="day-num">Day 13 &nbsp;·&nbsp; Friday</div>
+      <div class="day-title">Rome → LAX · Fly Home</div>
+      <div class="day-date">Arrivederci Italia!</div>
+    </div>
+    <span class="phase-badge badge-home">🏠 Fly Home</span>
+  </div>
+  <div class="day-body">
+    <div class="detail-row">
+      <div class="detail-icon" style="background:#E5E7EB">✈️</div>
+      <div class="detail-label">Transport</div>
+      <div class="detail-text">Leonardo Express: Roma Termini → FCO Airport 32 min, €14/person. Or taxi €50 flat. Flight: ITA Airways AZ620 departs FCO 9:30am, arrives LAX 1:15pm (direct, ~13 hr). Alternative: evening flight with 1 stop (&lt;3hr) through London/Frankfurt/Zurich.</div>
+    </div>
+    <div class="detail-row">
+      <div class="detail-icon" style="background:#FEF3C7">🌅</div>
+      <div class="detail-label">Morning</div>
+      <div class="detail-text">Check out. Early airport transfer for 9:30am departure. Last espresso in Rome!</div>
+    </div>
+    <div class="detail-row">
+      <div class="detail-icon" style="background:#E0F2FE">✈️</div>
+      <div class="detail-label">Flight</div>
+      <div class="detail-text">13-hour direct flight FCO → LAX. Arrive Los Angeles same day at 1:15pm (direct) or evening (1-stop).</div>
+    </div>
+    <div class="expand-section">
+      <button class="expand-btn" onclick="toggleExpand(this)">✈️ Flight Notes <span class="chevron">▼</span></button>
+      <div class="expand-panel">
+        <div class="hotel-name">ITA Airways AZ620</div>
+        <div class="hotel-desc">Direct FCO → LAX, departs 9:30am, arrives 1:15pm local time. 13-hour flight. Request kosher meal when booking.</div>
+        <div style="margin-top:12px"><div class="hotel-name">Alternative: Evening flight with connection</div>
+        <div class="hotel-desc">1-stop through London, Frankfurt, or Zurich under 3hr total connection time. Leaves more morning time in Rome but arrives later in LA.</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /tab-itinerary -->
+
+<!-- ======================== MAP TAB ======================== -->
+<div id="tab-map" class="tab-content">
+  <div class="map-container">
+    <h2>Trip Route Map</h2>
+    <p>13 stops across Switzerland and Italy — numbered in order with color-coded phases.</p>
+    <svg class="route-map" viewBox="0 0 500 700" xmlns="http://www.w3.org/2000/svg">
+      <!-- Background -->
+      <rect width="500" height="700" fill="#EEF2F7" rx="12"/>
+      <!-- Ocean -->
+      <ellipse cx="400" cy="600" rx="160" ry="120" fill="#BFDBFE" opacity="0.5"/>
+      <!-- Alps range suggestion -->
+      <path d="M 80 200 L 120 160 L 155 195 L 185 150 L 220 185 L 260 155 L 300 200" stroke="#9CA3AF" stroke-width="1.5" fill="none" opacity="0.4"/>
+
+      <!-- ROUTE LINES -->
+      <!-- LAX to Zurich (dotted - flight) -->
+      <line x1="60" y1="100" x2="190" y2="235" stroke="#7C3AED" stroke-width="2" stroke-dasharray="6,4" opacity="0.7"/>
+      <!-- Zurich to Lucerne -->
+      <line x1="190" y1="235" x2="165" y2="270" stroke="#2563EB" stroke-width="2"/>
+      <!-- Zurich to Rhine Falls -->
+      <line x1="190" y1="235" x2="155" y2="215" stroke="#2563EB" stroke-width="2"/>
+      <!-- Zurich to Venice (travel) -->
+      <line x1="190" y1="235" x2="290" y2="330" stroke="#7C3AED" stroke-width="2" stroke-dasharray="6,4"/>
+      <!-- Venice to Lake Como (curve through Milan) -->
+      <path d="M 290 330 Q 230 340 210 300 Q 195 265 185 280" stroke="#7C3AED" stroke-width="2" stroke-dasharray="6,4" fill="none"/>
+      <!-- Lake Como to Florence -->
+      <line x1="185" y1="280" x2="235" y2="400" stroke="#7C3AED" stroke-width="2" stroke-dasharray="6,4"/>
+      <!-- Florence to Rome -->
+      <line x1="235" y1="400" x2="255" y2="490" stroke="#7C3AED" stroke-width="2" stroke-dasharray="6,4"/>
+      <!-- Rome to Capri -->
+      <line x1="255" y1="490" x2="275" y2="570" stroke="#EA580C" stroke-width="2"/>
+      <!-- Rome to FCO (home) -->
+      <line x1="255" y1="490" x2="60" y2="100" stroke="#6B7280" stroke-width="1.5" stroke-dasharray="8,5" opacity="0.5"/>
+
+      <!-- STOP MARKERS -->
+      <!-- 0: LAX -->
+      <circle cx="60" cy="100" r="14" fill="#6B7280"/>
+      <text x="60" y="105" text-anchor="middle" fill="white" font-size="11" font-weight="bold" font-family="Inter, sans-serif">LAX</text>
+      <text x="80" y="98" fill="#374151" font-size="10" font-family="Inter, sans-serif">Los Angeles</text>
+
+      <!-- 1: Zurich -->
+      <circle cx="190" cy="235" r="16" fill="#2563EB"/>
+      <text x="190" y="240" text-anchor="middle" fill="white" font-size="12" font-weight="bold" font-family="Inter, sans-serif">1</text>
+      <text x="212" y="230" fill="#1D4ED8" font-size="11" font-weight="600" font-family="Inter, sans-serif">Zurich</text>
+      <text x="212" y="243" fill="#6B7280" font-size="9" font-family="Inter, sans-serif">Days 1–5</text>
+
+      <!-- 2: Lucerne -->
+      <circle cx="165" cy="270" r="12" fill="#2563EB" opacity="0.85"/>
+      <text x="165" y="275" text-anchor="middle" fill="white" font-size="10" font-weight="bold" font-family="Inter, sans-serif">2</text>
+      <text x="143" y="285" fill="#1D4ED8" font-size="10" font-family="Inter, sans-serif">Lucerne</text>
+
+      <!-- 3: Rhine Falls -->
+      <circle cx="155" cy="215" r="12" fill="#2563EB" opacity="0.85"/>
+      <text x="155" y="220" text-anchor="middle" fill="white" font-size="10" font-weight="bold" font-family="Inter, sans-serif">3</text>
+      <text x="130" y="213" fill="#1D4ED8" font-size="9" font-family="Inter, sans-serif">Rhine Falls</text>
+
+      <!-- 4: Venice -->
+      <circle cx="290" cy="330" r="14" fill="#16A34A"/>
+      <text x="290" y="335" text-anchor="middle" fill="white" font-size="11" font-weight="bold" font-family="Inter, sans-serif">4</text>
+      <text x="308" y="326" fill="#15803D" font-size="11" font-weight="600" font-family="Inter, sans-serif">Venice</text>
+      <text x="308" y="339" fill="#6B7280" font-size="9" font-family="Inter, sans-serif">Days 6–7 · Shabbat</text>
+
+      <!-- 5: Lake Como -->
+      <circle cx="185" cy="280" r="12" fill="#2563EB" opacity="0.75"/>
+      <text x="185" y="285" text-anchor="middle" fill="white" font-size="10" font-weight="bold" font-family="Inter, sans-serif">5</text>
+      <text x="163" y="296" fill="#1D4ED8" font-size="9" font-family="Inter, sans-serif">L. Como</text>
+
+      <!-- 6: Florence -->
+      <circle cx="235" cy="400" r="14" fill="#EA580C"/>
+      <text x="235" y="405" text-anchor="middle" fill="white" font-size="11" font-weight="bold" font-family="Inter, sans-serif">6</text>
+      <text x="253" y="396" fill="#C2410C" font-size="11" font-weight="600" font-family="Inter, sans-serif">Florence</text>
+      <text x="253" y="409" fill="#6B7280" font-size="9" font-family="Inter, sans-serif">Days 8–9</text>
+
+      <!-- 7: Rome -->
+      <circle cx="255" cy="490" r="16" fill="#EA580C"/>
+      <text x="255" y="495" text-anchor="middle" fill="white" font-size="12" font-weight="bold" font-family="Inter, sans-serif">7</text>
+      <text x="275" y="485" fill="#C2410C" font-size="12" font-weight="700" font-family="Inter, sans-serif">Rome</text>
+      <text x="275" y="498" fill="#6B7280" font-size="9" font-family="Inter, sans-serif">Days 10–12</text>
+
+      <!-- 8: Capri -->
+      <circle cx="275" cy="570" r="12" fill="#EA580C" opacity="0.85"/>
+      <text x="275" y="575" text-anchor="middle" fill="white" font-size="10" font-weight="bold" font-family="Inter, sans-serif">8</text>
+      <text x="290" y="573" fill="#C2410C" font-size="10" font-family="Inter, sans-serif">Capri</text>
+
+      <!-- Legend -->
+      <rect x="16" y="620" width="200" height="70" fill="white" rx="8" opacity="0.9"/>
+      <circle cx="30" cy="635" r="5" fill="#2563EB"/><text x="40" y="639" font-size="10" font-family="Inter, sans-serif" fill="#374151">Switzerland</text>
+      <circle cx="30" cy="652" r="5" fill="#16A34A"/><text x="40" y="656" font-size="10" font-family="Inter, sans-serif" fill="#374151">Shabbat</text>
+      <circle cx="30" cy="669" r="5" fill="#EA580C"/><text x="40" y="673" font-size="10" font-family="Inter, sans-serif" fill="#374151">Italy</text>
+      <circle cx="110" cy="635" r="5" fill="#7C3AED"/><text x="120" y="639" font-size="10" font-family="Inter, sans-serif" fill="#374151">Travel</text>
+      <line x1="108" y1="652" x2="118" y2="652" stroke="#7C3AED" stroke-width="2" stroke-dasharray="3,2"/>
+      <text x="120" y="656" font-size="10" font-family="Inter, sans-serif" fill="#374151">Flight</text>
+      <circle cx="110" cy="669" r="5" fill="#6B7280"/><text x="120" y="673" font-size="10" font-family="Inter, sans-serif" fill="#374151">Home</text>
+    </svg>
+  </div>
+</div>
+
+<!-- ======================== PACKING TAB ======================== -->
+<div id="tab-packing" class="tab-content">
+  <div class="packing-header">
+    <h2>Packing Checklist</h2>
+    <p>Check items off as you pack. Progress is saved in your browser.</p>
+  </div>
+  <div class="pack-actions">
+    <button class="pack-btn" onclick="expandAllCategories()">Expand All</button>
+    <button class="pack-btn" onclick="uncheckAll()">Uncheck All</button>
+    <button class="pack-btn primary" onclick="checkAll()">Check All</button>
+  </div>
+
+  <div class="packing-category" id="cat-docs">
+    <div class="packing-cat-header" onclick="toggleCategory('cat-docs')">
+      <span class="packing-cat-icon">📋</span>
+      <span class="packing-cat-title">Documents &amp; Money</span>
+      <span class="packing-cat-count" id="cat-docs-count">0/8</span>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="packing-progress"><div class="packing-progress-bar" id="cat-docs-bar" style="width:0%"></div></div>
+    <div class="packing-items" id="cat-docs-items" style="display:none">
+      <div class="packing-item"><input type="checkbox" id="p1" onchange="savePacking()"><label for="p1">Passports — all family members (check expiry &gt;6 months)</label></div>
+      <div class="packing-item"><input type="checkbox" id="p2" onchange="savePacking()"><label for="p2">Printed flight confirmations &amp; hotel bookings</label></div>
+      <div class="packing-item"><input type="checkbox" id="p3" onchange="savePacking()"><label for="p3">Travel insurance documents</label></div>
+      <div class="packing-item"><input type="checkbox" id="p4" onchange="savePacking()"><label for="p4">Credit cards (notify bank of travel dates)</label></div>
+      <div class="packing-item"><input type="checkbox" id="p5" onchange="savePacking()"><label for="p5">Cash: CHF (Swiss Francs) + EUR (Euros)</label></div>
+      <div class="packing-item"><input type="checkbox" id="p6" onchange="savePacking()"><label for="p6">Synagogue &amp; Chabad contact numbers printed</label></div>
+      <div class="packing-item"><input type="checkbox" id="p7" onchange="savePacking()"><label for="p7">Swiss Travel Pass (if purchasing)</label></div>
+      <div class="packing-item"><input type="checkbox" id="p8" onchange="savePacking()"><label for="p8">Printed Colosseum + train ticket confirmations</label></div>
+    </div>
+  </div>
+
+  <div class="packing-category" id="cat-clothing">
+    <div class="packing-cat-header" onclick="toggleCategory('cat-clothing')">
+      <span class="packing-cat-icon">👗</span>
+      <span class="packing-cat-title">Clothing</span>
+      <span class="packing-cat-count" id="cat-clothing-count">0/10</span>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="packing-progress"><div class="packing-progress-bar" id="cat-clothing-bar" style="width:0%"></div></div>
+    <div class="packing-items" id="cat-clothing-items" style="display:none">
+      <div class="packing-item"><input type="checkbox" id="p9" onchange="savePacking()"><label for="p9">Comfortable walking shoes — broken in before trip!</label></div>
+      <div class="packing-item"><input type="checkbox" id="p10" onchange="savePacking()"><label for="p10">Dress shoes for Shabbat &amp; nice dinners</label></div>
+      <div class="packing-item"><input type="checkbox" id="p11" onchange="savePacking()"><label for="p11">Shabbat / dressy clothes (ladies: skirt/dress, men: button-down)</label></div>
+      <div class="packing-item"><input type="checkbox" id="p12" onchange="savePacking()"><label for="p12">Lightweight layers for Swiss Alps &amp; mornings</label></div>
+      <div class="packing-item"><input type="checkbox" id="p13" onchange="savePacking()"><label for="p13">Light breathable clothes for Italian summer heat</label></div>
+      <div class="packing-item"><input type="checkbox" id="p14" onchange="savePacking()"><label for="p14">Rain jacket / light waterproof layer</label></div>
+      <div class="packing-item"><input type="checkbox" id="p15" onchange="savePacking()"><label for="p15">Swimwear (Capri boat tour, Lake Como)</label></div>
+      <div class="packing-item"><input type="checkbox" id="p16" onchange="savePacking()"><label for="p16">Sun hats for Italy &amp; Capri</label></div>
+      <div class="packing-item"><input type="checkbox" id="p17" onchange="savePacking()"><label for="p17">Modest shoulder coverings for synagogues &amp; churches</label></div>
+      <div class="packing-item"><input type="checkbox" id="p18" onchange="savePacking()"><label for="p18">Kippot (yarmulkes)</label></div>
+    </div>
+  </div>
+
+  <div class="packing-category" id="cat-kosher">
+    <div class="packing-cat-header" onclick="toggleCategory('cat-kosher')">
+      <span class="packing-cat-icon">🥪</span>
+      <span class="packing-cat-title">Kosher Food Supplies</span>
+      <span class="packing-cat-count" id="cat-kosher-count">0/8</span>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="packing-progress"><div class="packing-progress-bar" id="cat-kosher-bar" style="width:0%"></div></div>
+    <div class="packing-items" id="cat-kosher-items" style="display:none">
+      <div class="packing-item"><input type="checkbox" id="p19" onchange="savePacking()"><label for="p19">Protein bars &amp; snacks (for Lucerne, Rhine Falls, Capri)</label></div>
+      <div class="packing-item"><input type="checkbox" id="p20" onchange="savePacking()"><label for="p20">Sealed kosher meals for travel days (airline + train)</label></div>
+      <div class="packing-item"><input type="checkbox" id="p21" onchange="savePacking()"><label for="p21">Reusable water bottles</label></div>
+      <div class="packing-item"><input type="checkbox" id="p22" onchange="savePacking()"><label for="p22">Disposable plates, cups, utensils for packed lunches</label></div>
+      <div class="packing-item"><input type="checkbox" id="p23" onchange="savePacking()"><label for="p23">Zip-lock bags for packing food</label></div>
+      <div class="packing-item"><input type="checkbox" id="p24" onchange="savePacking()"><label for="p24">Shabbat candles + candlesticks</label></div>
+      <div class="packing-item"><input type="checkbox" id="p25" onchange="savePacking()"><label for="p25">Mini kiddush cup + Shabbat wine/grape juice</label></div>
+      <div class="packing-item"><input type="checkbox" id="p26" onchange="savePacking()"><label for="p26">Challah covers + pre-ordered challah (buy in Zurich)</label></div>
+    </div>
+  </div>
+
+  <div class="packing-category" id="cat-electronics">
+    <div class="packing-cat-header" onclick="toggleCategory('cat-electronics')">
+      <span class="packing-cat-icon">🔌</span>
+      <span class="packing-cat-title">Electronics &amp; Adapters</span>
+      <span class="packing-cat-count" id="cat-electronics-count">0/6</span>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="packing-progress"><div class="packing-progress-bar" id="cat-electronics-bar" style="width:0%"></div></div>
+    <div class="packing-items" id="cat-electronics-items" style="display:none">
+      <div class="packing-item"><input type="checkbox" id="p27" onchange="savePacking()"><label for="p27">EU Type C power adapters (x2 minimum)</label></div>
+      <div class="packing-item"><input type="checkbox" id="p28" onchange="savePacking()"><label for="p28">Portable battery bank (charged)</label></div>
+      <div class="packing-item"><input type="checkbox" id="p29" onchange="savePacking()"><label for="p29">Camera (extra SD cards + battery)</label></div>
+      <div class="packing-item"><input type="checkbox" id="p30" onchange="savePacking()"><label for="p30">Noise-canceling headphones for long flights</label></div>
+      <div class="packing-item"><input type="checkbox" id="p31" onchange="savePacking()"><label for="p31">Kids' tablets / entertainment loaded for flights</label></div>
+      <div class="packing-item"><input type="checkbox" id="p32" onchange="savePacking()"><label for="p32">Phone charger cables for all devices</label></div>
+    </div>
+  </div>
+
+  <div class="packing-category" id="cat-health">
+    <div class="packing-cat-header" onclick="toggleCategory('cat-health')">
+      <span class="packing-cat-icon">💊</span>
+      <span class="packing-cat-title">Health &amp; Safety</span>
+      <span class="packing-cat-count" id="cat-health-count">0/7</span>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="packing-progress"><div class="packing-progress-bar" id="cat-health-bar" style="width:0%"></div></div>
+    <div class="packing-items" id="cat-health-items" style="display:none">
+      <div class="packing-item"><input type="checkbox" id="p33" onchange="savePacking()"><label for="p33">Prescription medications — extra supply for full trip</label></div>
+      <div class="packing-item"><input type="checkbox" id="p34" onchange="savePacking()"><label for="p34">Sunscreen SPF 50+ (Italian summer sun is intense)</label></div>
+      <div class="packing-item"><input type="checkbox" id="p35" onchange="savePacking()"><label for="p35">Motion sickness medication (ferries, funiculars)</label></div>
+      <div class="packing-item"><input type="checkbox" id="p36" onchange="savePacking()"><label for="p36">Basic first aid: bandages, ibuprofen, antihistamine</label></div>
+      <div class="packing-item"><input type="checkbox" id="p37" onchange="savePacking()"><label for="p37">Hand sanitizer + travel wipes</label></div>
+      <div class="packing-item"><input type="checkbox" id="p38" onchange="savePacking()"><label for="p38">Insect repellent</label></div>
+      <div class="packing-item"><input type="checkbox" id="p39" onchange="savePacking()"><label for="p39">COVID/health documentation if required</label></div>
+    </div>
+  </div>
+</div>
+
+<!-- ======================== BUDGET TAB ======================== -->
+<div id="tab-budget" class="tab-content">
+  <div class="budget-header">
+    <h2>Budget Estimator</h2>
+    <p>Adjust the number of travelers to see estimated costs. All prices in USD.</p>
+  </div>
+  <div class="budget-controls">
+    <label for="num-people">Number of travelers:</label>
+    <input type="number" id="num-people" value="4" min="1" max="20" oninput="calcBudget()">
+    <span style="color:#6B7280; font-size:0.875rem;">Based on double/family rooms throughout</span>
+  </div>
+  <div class="budget-totals">
+    <div class="budget-total-card">
+      <div class="label">Per Person</div>
+      <div class="amount" id="per-person">$0</div>
+    </div>
+    <div class="budget-total-card">
+      <div class="label">Family Total</div>
+      <div class="amount" id="family-total">$0</div>
+    </div>
+  </div>
+  <div class="budget-breakdown">
+    <h3>Cost Breakdown</h3>
+    <div id="budget-bars"></div>
+  </div>
+</div>
+
+<button class="print-btn" onclick="window.print()" title="Print itinerary">🖨</button>
+
+<script>
+// ====== VERSION TOGGLE ======
+let version = 'july';
+function setVersion(v) {
+  version = v;
+  document.getElementById('btn-july').classList.toggle('active', v === 'july');
+  document.getElementById('btn-august').classList.toggle('active', v === 'august');
+  document.getElementById('banner-july').style.display = v === 'july' ? 'block' : 'none';
+  document.getElementById('banner-august').style.display = v === 'august' ? 'block' : 'none';
+  document.querySelectorAll('.july-time').forEach(el => el.classList.toggle('show', v === 'july'));
+  document.querySelectorAll('.aug-time').forEach(el => el.classList.toggle('show', v === 'august'));
+}
+
+// ====== TABS ======
+function showTab(name) {
+  document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(el => el.classList.remove('active'));
+  document.getElementById('tab-' + name).classList.add('active');
+  event.target.classList.add('active');
+  if (name === 'budget') calcBudget();
+}
+
+// ====== DAY CARDS ======
+function toggleCard(header) {
+  const body = header.nextElementSibling;
+  const isOpen = body.style.display !== 'none';
+  body.style.display = isOpen ? 'none' : 'block';
+}
+
+// Show all day bodies by default
+document.querySelectorAll('.day-body').forEach(el => { el.style.display = 'block'; });
+
+// ====== EXPAND SECTIONS ======
+function toggleExpand(btn) {
+  btn.classList.toggle('open');
+  const panel = btn.nextElementSibling;
+  panel.classList.toggle('open');
+}
+
+// ====== PACKING ======
+const packCategories = {
+  'cat-docs': {ids: ['p1','p2','p3','p4','p5','p6','p7','p8']},
+  'cat-clothing': {ids: ['p9','p10','p11','p12','p13','p14','p15','p16','p17','p18']},
+  'cat-kosher': {ids: ['p19','p20','p21','p22','p23','p24','p25','p26']},
+  'cat-electronics': {ids: ['p27','p28','p29','p30','p31','p32']},
+  'cat-health': {ids: ['p33','p34','p35','p36','p37','p38','p39']}
+};
+
+function toggleCategory(catId) {
+  const items = document.getElementById(catId + '-items');
+  const header = document.querySelector('#' + catId + ' .packing-cat-header');
+  const chevron = header.querySelector('.chevron');
+  const isOpen = items.style.display !== 'none';
+  items.style.display = isOpen ? 'none' : 'block';
+  chevron.style.transform = isOpen ? '' : 'rotate(180deg)';
+}
+
+function expandAllCategories() {
+  Object.keys(packCategories).forEach(catId => {
+    const items = document.getElementById(catId + '-items');
+    const chevron = document.querySelector('#' + catId + ' .packing-cat-header .chevron');
+    items.style.display = 'block';
+    chevron.style.transform = 'rotate(180deg)';
+  });
+}
+
+function savePacking() {
+  const state = {};
+  document.querySelectorAll('.packing-item input[type=checkbox]').forEach(cb => {
+    state[cb.id] = cb.checked;
+    cb.closest('.packing-item').classList.toggle('checked', cb.checked);
+  });
+  localStorage.setItem('tripPacking', JSON.stringify(state));
+  updatePackingCounts();
+}
+
+function loadPacking() {
+  const saved = localStorage.getItem('tripPacking');
+  if (!saved) return;
+  const state = JSON.parse(saved);
+  Object.entries(state).forEach(([id, checked]) => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.checked = checked;
+      el.closest('.packing-item').classList.toggle('checked', checked);
+    }
+  });
+  updatePackingCounts();
+}
+
+function updatePackingCounts() {
+  Object.entries(packCategories).forEach(([catId, cat]) => {
+    const total = cat.ids.length;
+    const done = cat.ids.filter(id => {
+      const el = document.getElementById(id);
+      return el && el.checked;
+    }).length;
+    const countEl = document.getElementById(catId + '-count');
+    const barEl = document.getElementById(catId + '-bar');
+    if (countEl) countEl.textContent = done + '/' + total;
+    if (barEl) barEl.style.width = (done / total * 100) + '%';
+  });
+}
+
+function checkAll() {
+  document.querySelectorAll('.packing-item input[type=checkbox]').forEach(cb => { cb.checked = true; cb.closest('.packing-item').classList.add('checked'); });
+  savePacking();
+}
+
+function uncheckAll() {
+  document.querySelectorAll('.packing-item input[type=checkbox]').forEach(cb => { cb.checked = false; cb.closest('.packing-item').classList.remove('checked'); });
+  savePacking();
+}
+
+// ====== BUDGET ======
+const budgetItems = [
+  { name: 'Flights (RT)', perPerson: 1200, perFamily: 0, barClass: 'bar-flights', note: '$1,200/person' },
+  { name: 'Zurich Hotel', perPerson: 0, perFamily: 250*5, barClass: 'bar-hotel', note: '$250 × 5 nights' },
+  { name: 'Venice Hotel', perPerson: 0, perFamily: 300*1, barClass: 'bar-hotel', note: '$300 × 1 night' },
+  { name: 'Florence Hotel', perPerson: 0, perFamily: 250*2, barClass: 'bar-hotel', note: '$250 × 2 nights' },
+  { name: 'Rome Hotel', perPerson: 0, perFamily: 280*3, barClass: 'bar-hotel', note: '$280 × 3 nights' },
+  { name: 'Train Passes', perPerson: 400, perFamily: 0, barClass: 'bar-trains', note: '$400/person' },
+  { name: 'Food (13 days)', perPerson: 80*13, perFamily: 0, barClass: 'bar-food', note: '$80/person/day' },
+  { name: 'Activities (13 days)', perPerson: 50*13, perFamily: 0, barClass: 'bar-activities', note: '$50/person/day' },
+];
+
+function calcBudget() {
+  const n = parseInt(document.getElementById('num-people').value) || 4;
+  const items = budgetItems.map(item => {
+    const total = (item.perPerson * n) + item.perFamily;
+    return { ...item, total };
+  });
+  const grandTotal = items.reduce((s, i) => s + i.total, 0);
+  const perPerson = Math.round(grandTotal / n);
+
+  document.getElementById('per-person').textContent = '$' + perPerson.toLocaleString();
+  document.getElementById('family-total').textContent = '$' + grandTotal.toLocaleString();
+
+  const barsEl = document.getElementById('budget-bars');
+  barsEl.innerHTML = items.map(item => {
+    const pct = Math.round(item.total / grandTotal * 100);
+    return `<div class="budget-bar-row">
+      <div class="budget-bar-label">
+        <span class="name">${item.name} <span style="color:#9CA3AF;font-weight:400;font-size:0.8rem">${item.note}</span></span>
+        <span class="val">$${item.total.toLocaleString()} (${pct}%)</span>
+      </div>
+      <div class="budget-bar-track"><div class="budget-bar-fill ${item.barClass}" style="width:${pct}%"></div></div>
+    </div>`;
+  }).join('');
+}
+
+// ====== INIT ======
+loadPacking();
+calcBudget();
+</script>
+</body>
+</html>
