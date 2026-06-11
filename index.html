@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Switzerland & Italy Family Trip · 13 Days</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <style>
   :root {
     --blue: #2563EB; --blue-light: #EFF6FF; --blue-mid: #BFDBFE;
@@ -102,8 +104,11 @@
   /* MAP TAB */
   .map-container { background: white; border-radius: var(--radius); box-shadow: var(--shadow); padding: 24px; }
   .map-container h2 { font-size: 1.4rem; margin-bottom: 6px; }
-  .map-container p { color: #6B7280; font-size: 0.875rem; margin-bottom: 20px; }
-  svg.route-map { width: 100%; max-width: 600px; display: block; margin: 0 auto; }
+  .map-container p { color: #6B7280; font-size: 0.875rem; }
+  .map-legend { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 10px; }
+  .leg-item { display: flex; align-items: center; gap: 6px; font-size: 0.8rem; font-weight: 500; color: #374151; }
+  .leg-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+  .map-marker-label { background: white; border: 2px solid currentColor; border-radius: 50%; width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 12px; font-family: 'Inter', sans-serif; box-shadow: 0 2px 6px rgba(0,0,0,0.25); }
 
   /* PACKING TAB */
   .packing-header { margin-bottom: 20px; }
@@ -870,95 +875,15 @@
 <div id="tab-map" class="tab-content">
   <div class="map-container">
     <h2>Trip Route Map</h2>
-    <p>13 stops across Switzerland and Italy — numbered in order with color-coded phases.</p>
-    <svg class="route-map" viewBox="0 0 500 700" xmlns="http://www.w3.org/2000/svg">
-      <!-- Background -->
-      <rect width="500" height="700" fill="#EEF2F7" rx="12"/>
-      <!-- Ocean -->
-      <ellipse cx="400" cy="600" rx="160" ry="120" fill="#BFDBFE" opacity="0.5"/>
-      <!-- Alps range suggestion -->
-      <path d="M 80 200 L 120 160 L 155 195 L 185 150 L 220 185 L 260 155 L 300 200" stroke="#9CA3AF" stroke-width="1.5" fill="none" opacity="0.4"/>
-
-      <!-- ROUTE LINES -->
-      <!-- LAX to Zurich (dotted - flight) -->
-      <line x1="60" y1="100" x2="190" y2="235" stroke="#7C3AED" stroke-width="2" stroke-dasharray="6,4" opacity="0.7"/>
-      <!-- Zurich to Lucerne -->
-      <line x1="190" y1="235" x2="165" y2="270" stroke="#2563EB" stroke-width="2"/>
-      <!-- Zurich to Rhine Falls -->
-      <line x1="190" y1="235" x2="155" y2="215" stroke="#2563EB" stroke-width="2"/>
-      <!-- Zurich to Venice (travel) -->
-      <line x1="190" y1="235" x2="290" y2="330" stroke="#7C3AED" stroke-width="2" stroke-dasharray="6,4"/>
-      <!-- Venice to Lake Como (curve through Milan) -->
-      <path d="M 290 330 Q 230 340 210 300 Q 195 265 185 280" stroke="#7C3AED" stroke-width="2" stroke-dasharray="6,4" fill="none"/>
-      <!-- Lake Como to Florence -->
-      <line x1="185" y1="280" x2="235" y2="400" stroke="#7C3AED" stroke-width="2" stroke-dasharray="6,4"/>
-      <!-- Florence to Rome -->
-      <line x1="235" y1="400" x2="255" y2="490" stroke="#7C3AED" stroke-width="2" stroke-dasharray="6,4"/>
-      <!-- Rome to Capri -->
-      <line x1="255" y1="490" x2="275" y2="570" stroke="#EA580C" stroke-width="2"/>
-      <!-- Rome to FCO (home) -->
-      <line x1="255" y1="490" x2="60" y2="100" stroke="#6B7280" stroke-width="1.5" stroke-dasharray="8,5" opacity="0.5"/>
-
-      <!-- STOP MARKERS -->
-      <!-- 0: LAX -->
-      <circle cx="60" cy="100" r="14" fill="#6B7280"/>
-      <text x="60" y="105" text-anchor="middle" fill="white" font-size="11" font-weight="bold" font-family="Inter, sans-serif">LAX</text>
-      <text x="80" y="98" fill="#374151" font-size="10" font-family="Inter, sans-serif">Los Angeles</text>
-
-      <!-- 1: Zurich -->
-      <circle cx="190" cy="235" r="16" fill="#2563EB"/>
-      <text x="190" y="240" text-anchor="middle" fill="white" font-size="12" font-weight="bold" font-family="Inter, sans-serif">1</text>
-      <text x="212" y="230" fill="#1D4ED8" font-size="11" font-weight="600" font-family="Inter, sans-serif">Zurich</text>
-      <text x="212" y="243" fill="#6B7280" font-size="9" font-family="Inter, sans-serif">Days 1–5</text>
-
-      <!-- 2: Lucerne -->
-      <circle cx="165" cy="270" r="12" fill="#2563EB" opacity="0.85"/>
-      <text x="165" y="275" text-anchor="middle" fill="white" font-size="10" font-weight="bold" font-family="Inter, sans-serif">2</text>
-      <text x="143" y="285" fill="#1D4ED8" font-size="10" font-family="Inter, sans-serif">Lucerne</text>
-
-      <!-- 3: Rhine Falls -->
-      <circle cx="155" cy="215" r="12" fill="#2563EB" opacity="0.85"/>
-      <text x="155" y="220" text-anchor="middle" fill="white" font-size="10" font-weight="bold" font-family="Inter, sans-serif">3</text>
-      <text x="130" y="213" fill="#1D4ED8" font-size="9" font-family="Inter, sans-serif">Rhine Falls</text>
-
-      <!-- 4: Venice -->
-      <circle cx="290" cy="330" r="14" fill="#16A34A"/>
-      <text x="290" y="335" text-anchor="middle" fill="white" font-size="11" font-weight="bold" font-family="Inter, sans-serif">4</text>
-      <text x="308" y="326" fill="#15803D" font-size="11" font-weight="600" font-family="Inter, sans-serif">Venice</text>
-      <text x="308" y="339" fill="#6B7280" font-size="9" font-family="Inter, sans-serif">Days 6–7 · Shabbat</text>
-
-      <!-- 5: Lake Como -->
-      <circle cx="185" cy="280" r="12" fill="#2563EB" opacity="0.75"/>
-      <text x="185" y="285" text-anchor="middle" fill="white" font-size="10" font-weight="bold" font-family="Inter, sans-serif">5</text>
-      <text x="163" y="296" fill="#1D4ED8" font-size="9" font-family="Inter, sans-serif">L. Como</text>
-
-      <!-- 6: Florence -->
-      <circle cx="235" cy="400" r="14" fill="#EA580C"/>
-      <text x="235" y="405" text-anchor="middle" fill="white" font-size="11" font-weight="bold" font-family="Inter, sans-serif">6</text>
-      <text x="253" y="396" fill="#C2410C" font-size="11" font-weight="600" font-family="Inter, sans-serif">Florence</text>
-      <text x="253" y="409" fill="#6B7280" font-size="9" font-family="Inter, sans-serif">Days 8–9</text>
-
-      <!-- 7: Rome -->
-      <circle cx="255" cy="490" r="16" fill="#EA580C"/>
-      <text x="255" y="495" text-anchor="middle" fill="white" font-size="12" font-weight="bold" font-family="Inter, sans-serif">7</text>
-      <text x="275" y="485" fill="#C2410C" font-size="12" font-weight="700" font-family="Inter, sans-serif">Rome</text>
-      <text x="275" y="498" fill="#6B7280" font-size="9" font-family="Inter, sans-serif">Days 10–12</text>
-
-      <!-- 8: Capri -->
-      <circle cx="275" cy="570" r="12" fill="#EA580C" opacity="0.85"/>
-      <text x="275" y="575" text-anchor="middle" fill="white" font-size="10" font-weight="bold" font-family="Inter, sans-serif">8</text>
-      <text x="290" y="573" fill="#C2410C" font-size="10" font-family="Inter, sans-serif">Capri</text>
-
-      <!-- Legend -->
-      <rect x="16" y="620" width="200" height="70" fill="white" rx="8" opacity="0.9"/>
-      <circle cx="30" cy="635" r="5" fill="#2563EB"/><text x="40" y="639" font-size="10" font-family="Inter, sans-serif" fill="#374151">Switzerland</text>
-      <circle cx="30" cy="652" r="5" fill="#16A34A"/><text x="40" y="656" font-size="10" font-family="Inter, sans-serif" fill="#374151">Shabbat</text>
-      <circle cx="30" cy="669" r="5" fill="#EA580C"/><text x="40" y="673" font-size="10" font-family="Inter, sans-serif" fill="#374151">Italy</text>
-      <circle cx="110" cy="635" r="5" fill="#7C3AED"/><text x="120" y="639" font-size="10" font-family="Inter, sans-serif" fill="#374151">Travel</text>
-      <line x1="108" y1="652" x2="118" y2="652" stroke="#7C3AED" stroke-width="2" stroke-dasharray="3,2"/>
-      <text x="120" y="656" font-size="10" font-family="Inter, sans-serif" fill="#374151">Flight</text>
-      <circle cx="110" cy="669" r="5" fill="#6B7280"/><text x="120" y="673" font-size="10" font-family="Inter, sans-serif" fill="#374151">Home</text>
-    </svg>
+    <p>Click any marker for details. Zoom and pan freely.</p>
+    <div class="map-legend">
+      <span class="leg-item"><span class="leg-dot" style="background:#2563EB"></span>Switzerland</span>
+      <span class="leg-item"><span class="leg-dot" style="background:#16A34A"></span>Shabbat</span>
+      <span class="leg-item"><span class="leg-dot" style="background:#EA580C"></span>Italy</span>
+      <span class="leg-item"><span class="leg-dot" style="background:#7C3AED"></span>Travel</span>
+      <span class="leg-item"><span class="leg-dot" style="background:#6B7280"></span>Home</span>
+    </div>
+    <div id="trip-map" style="height:540px;border-radius:12px;overflow:hidden;margin-top:12px;box-shadow:0 2px 16px rgba(0,0,0,0.12);"></div>
   </div>
 </div>
 
@@ -1123,6 +1048,7 @@ function showTab(name) {
   document.getElementById('tab-' + name).classList.add('active');
   event.target.classList.add('active');
   if (name === 'budget') calcBudget();
+  if (name === 'map') setTimeout(initMap, 50);
 }
 
 // ====== DAY CARDS ======
@@ -1257,6 +1183,82 @@ function calcBudget() {
 // ====== INIT ======
 loadPacking();
 calcBudget();
+
+// ====== MAP ======
+let mapInitialized = false;
+function initMap() {
+  if (mapInitialized) return;
+  mapInitialized = true;
+
+  const map = L.map('trip-map', { zoomControl: true }).setView([45.5, 11.5], 6);
+
+  // OpenStreetMap tiles (free, no API key)
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+    maxZoom: 18
+  }).addTo(map);
+
+  const stops = [
+    { lat: 47.3769, lng: 8.5417,  label: '1', color: '#2563EB', name: 'Zurich',      days: 'Days 1–5', detail: 'Old Town · Watches · Lake Zurich · Day trips to Lucerne & Rhine Falls' },
+    { lat: 47.0502, lng: 8.3093,  label: '2', color: '#2563EB', name: 'Lucerne',     days: 'Day 3 trip', detail: 'Chapel Bridge · Lake Lucerne · Mount Rigi · Pack lunch from Zurich!' },
+    { lat: 47.6779, lng: 8.6156,  label: '3', color: '#2563EB', name: 'Rhine Falls', days: 'Day 4 trip', detail: 'Europe\'s largest waterfall · Boat ride · Lindt Chocolate nearby' },
+    { lat: 45.4408, lng: 12.3155, label: '4', color: '#16A34A', name: 'Venice',      days: 'Days 6–7 · Shabbat', detail: 'Jewish Ghetto · Scuola Tedesca · Grand Canal · Shabbat with Chabad' },
+    { lat: 45.9845, lng: 9.2744,  label: '5', color: '#7C3AED', name: 'Lake Como',   days: 'Day 8 stop', detail: 'Lakefront walk · Ferry · Como-Brunate Funicular · Alps views' },
+    { lat: 43.7696, lng: 11.2558, label: '6', color: '#EA580C', name: 'Florence',    days: 'Days 8–9', detail: 'Piazzale Michelangelo · Ponte Vecchio · Duomo · Ruth\'s Kosher Restaurant' },
+    { lat: 41.9028, lng: 12.4964, label: '7', color: '#EA580C', name: 'Rome',        days: 'Days 10–12', detail: 'Colosseum · Roman Forum · Jewish Ghetto · BaGhetto Restaurant' },
+    { lat: 40.5503, lng: 14.2412, label: '8', color: '#EA580C', name: 'Capri',       days: 'Day 12 trip', detail: 'Gardens of Augustus · Villa Jovis · Boat tour · ⚠️ No kosher food — pack everything!' },
+  ];
+
+  // Route polyline (train/travel path)
+  const routeCoords = stops.map(s => [s.lat, s.lng]);
+  L.polyline(routeCoords, {
+    color: '#7C3AED',
+    weight: 3,
+    opacity: 0.65,
+    dashArray: '8, 6'
+  }).addTo(map);
+
+  // Solid lines for Switzerland day trips
+  L.polyline([[47.3769, 8.5417], [47.0502, 8.3093]], { color: '#2563EB', weight: 2.5, opacity: 0.7 }).addTo(map);
+  L.polyline([[47.3769, 8.5417], [47.6779, 8.6156]], { color: '#2563EB', weight: 2.5, opacity: 0.7 }).addTo(map);
+  // Rome to Capri solid
+  L.polyline([[41.9028, 12.4964], [40.5503, 14.2412]], { color: '#EA580C', weight: 2.5, opacity: 0.7 }).addTo(map);
+
+  // Custom numbered markers
+  stops.forEach(stop => {
+    const icon = L.divIcon({
+      className: '',
+      html: `<div style="
+        background:${stop.color};
+        color:white;
+        width:30px;height:30px;
+        border-radius:50%;
+        display:flex;align-items:center;justify-content:center;
+        font-weight:700;font-size:13px;
+        font-family:'Inter',sans-serif;
+        border:3px solid white;
+        box-shadow:0 2px 8px rgba(0,0,0,0.35);
+        ">${stop.label}</div>`,
+      iconSize: [30, 30],
+      iconAnchor: [15, 15],
+      popupAnchor: [0, -18]
+    });
+
+    const marker = L.marker([stop.lat, stop.lng], { icon }).addTo(map);
+    marker.bindPopup(`
+      <div style="font-family:'Inter',sans-serif;min-width:180px">
+        <div style="font-weight:700;font-size:1rem;color:#1a1a2e;margin-bottom:2px">${stop.name}</div>
+        <div style="font-size:0.75rem;font-weight:600;color:${stop.color};margin-bottom:6px">${stop.days}</div>
+        <div style="font-size:0.82rem;color:#4B5563;line-height:1.5">${stop.detail}</div>
+      </div>
+    `, { maxWidth: 240 });
+  });
+
+  // Fit map to all stops
+  const bounds = L.latLngBounds(stops.map(s => [s.lat, s.lng]));
+  map.fitBounds(bounds, { padding: [40, 40] });
+}
+
 </script>
 </body>
 </html>
